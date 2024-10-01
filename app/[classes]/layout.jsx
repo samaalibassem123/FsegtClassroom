@@ -1,7 +1,8 @@
 import Header from "@/components/Header";
 import { ThemeProvider } from "@/components/theme-provider";
 import Link from "next/link";
-import { BookText, Video, MessageCircle } from "lucide-react";
+import { BookText, Video, MessageCircle, ArrowLeftToLine } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const metadata = {
   title: "Classes",
@@ -22,7 +23,6 @@ export default function RootLayout({ children, classes }) {
               <MessageCircle />
               <span className="sm:inline-block hidden">chat</span>
             </Link>
-
             <Link
               href={`/${classes}/meet`}
               className=" gap-2 flex items-center gap shadow-md hover:shadow-lg transition-all font-semibold  dark:bg-white dark:text-black  p-2 rounded-lg sm:w-full w-fit"
@@ -30,7 +30,6 @@ export default function RootLayout({ children, classes }) {
               <Video />
               <span className="sm:inline-block hidden">Meet</span>
             </Link>
-
             <Link
               href={`/${classes}/docs`}
               className=" gap-2 flex items-center gap shadow-md hover:shadow-lg transition-all font-semibold  dark:bg-white dark:text-black  p-2 rounded-lg sm:w-full w-fit"
@@ -38,6 +37,15 @@ export default function RootLayout({ children, classes }) {
               <BookText />
               <span className="sm:inline-block hidden">Documents</span>
             </Link>
+            <Button>
+              <Link href={"/"} className="flex gap-1 items-center">
+                <ArrowLeftToLine />
+                <span className=" underline sm:inline hidden">
+                  {" "}
+                  Go Back to Dashboard
+                </span>
+              </Link>
+            </Button>
           </nav>
           {children}
         </div>

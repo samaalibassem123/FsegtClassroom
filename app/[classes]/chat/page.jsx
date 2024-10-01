@@ -7,5 +7,5 @@ export default async function page({ classes }) {
   if (!session?.user) {
     redirect("/");
   }
-  return <div>hey</div>;
+  return <div>chat</div>;
 }
