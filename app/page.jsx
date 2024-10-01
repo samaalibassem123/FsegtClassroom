@@ -1,13 +1,22 @@
+import { auth } from "@/auth";
 import { ModeToggle } from "@/components/ModeToggle";
 import Welcome from "@/components/Welcome";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+  if (session?.user) {
+    redirect("/account");
+  }
+
   return (
     <div className=" relative">
+      {/*the blurs bubbels */}
       <div className=" -z-20 min-h-svh w-full relative">
         <div className=" absolute sm:top-[50%] top-[10%] sm:left-[10%] left-[1%] sm:size-[200px] size-[100px] bg-blue-300 dark:bg-blue-200 rounded-full  " />
         <div className=" absolute sm:top-[20%]  top-[70%] sm:left-[70%] left-[70%] sm:size-[200px] size-[100px] bg-orange-300 dark:bg-orange-200 rounded-full  " />
       </div>
+      {/*end */}
       <div className=" absolute top-0 w-full  flex items-center justify-end p-2 z-30">
         <ModeToggle />
       </div>
