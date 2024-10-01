@@ -23,6 +23,7 @@ export default function Dashboard() {
           <motion.div variants={ShowAnimation}>
             <JoinPrompt />
           </motion.div>
+          {/*classes */}
           <motion.div variants={ShowAnimation}>
             <Cardclass />
           </motion.div>
@@ -39,6 +40,7 @@ export default function Dashboard() {
           <motion.div variants={ShowAnimation}>
             <Addprompt />
           </motion.div>
+          {/*classes */}
           <motion.div variants={ShowAnimation}>
             <Cardclass />
           </motion.div>

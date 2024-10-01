@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 import { BookText, Video, MessageCircle } from "lucide-react";
 import Link from "next/link";
 
-export default function Cardclass({ classId }) {
+export default function Cardclass({ classId = "test" }) {
   return (
     <div className="flex flex-col gap-7 w-[300px] h-[300px] border p-2 rounded-lg bg-white">
       <div className="flex justify-between items-center  py-2 border-b-2">
