@@ -24,7 +24,7 @@ export default function RootLayout({ children, classes }) {
               <span className="sm:inline-block hidden">chat</span>
             </Link>
             <Link
-              href={`/${classes}/meet`}
+              href={`/meet`}
               className=" gap-2 flex items-center gap shadow-md hover:shadow-lg transition-all font-semibold  dark:bg-white dark:text-black  p-2 rounded-lg sm:w-full w-fit"
             >
               <Video />

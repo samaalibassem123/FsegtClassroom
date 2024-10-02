@@ -35,7 +35,7 @@ export default function Cardclass({ classId = "test" }) {
       </div>
       <div className="flex items-center justify-evenly">
         <Button asChild className="bg-gray-400">
-          <Link href={`/${classId}/meet`} title="video call">
+          <Link href={`/meet`} title="video call">
             <Video />
           </Link>
         </Button>
