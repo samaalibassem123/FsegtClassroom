@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 function MyVideoConference() {
   // `useTracks` returns all camera and screen share tracks. If a user
   // joins without a published camera track, a placeholder track is returned.
@@ -59,7 +60,7 @@ export default function MeetForm() {
 
   if (room === "") {
     return (
-      <div className="w-full h-[70vh] flex justify-center sm:items-center items-start sm:p-0 p-10">
+      <div className="w-full min-h-svh flex justify-center items-center  sm:p-0 ">
         <form onSubmit={Handlesubmit} className="flex flex-col gap-4">
           <Label>Meet code:</Label>
           <Label className="text-gray-400">
@@ -67,6 +68,9 @@ export default function MeetForm() {
           </Label>
           <Input type="text" name="code" className=" dark:border-white" />
           <Button type="submit">Join</Button>
+          <Button asChild>
+            <Link href="/">Go Back to Dashboard</Link>
+          </Button>
         </form>
       </div>
     );
@@ -78,6 +82,7 @@ export default function MeetForm() {
     return (
       <div className="w-full h-screen">
         <LiveKitRoom
+          onDisconnected={() => setRoom("")}
           video={true}
           audio={true}
           token={token}
