@@ -10,6 +10,9 @@ import {
   UserRound,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "@/app/api/uploadthing/core";
 
 export const metadata = {
   title: "Classes",
@@ -19,10 +22,19 @@ export const metadata = {
 export default function RootLayout({ children, classes }) {
   return (
     <main>
+      <NextSSRPlugin
+        /**
+         * The `extractRouterConfig` will extract **only** the route configs
+         * from the router to prevent additional information from being
+         * leaked to the client. The data passed to the client is the same
+         * as if you were to fetch `/api/uploadthing` directly.
+         */
+        routerConfig={extractRouterConfig(ourFileRouter)}
+      />
       <ThemeProvider attribute="class" enableSystem>
         <Header />
         <div className="flex gap-2">
-          <nav className=" flex flex-col sm:items-start items-center gap-6  w-[20%] min-h-svh p-2 pt-6 shadow-md dark:bg-black/20 drop-shadow-lg">
+          <nav className=" flex flex-col sm:items-start items-center gap-6  sm:w-[200px] w-[100px] min-h-svh p-2 pt-6 shadow-md dark:bg-black/20 drop-shadow-lg">
             <Link
               title="chat"
               href={`/${classes}/chat`}
@@ -70,9 +82,8 @@ export default function RootLayout({ children, classes }) {
                 className="flex gap-1 items-center"
               >
                 <ArrowLeftToLine />
-                <span className=" underline sm:inline hidden">
-                  {" "}
-                  Go Back to Dashboard
+                <span className=" underline lg:inline hidden">
+                  Back to Dashboard
                 </span>
               </Link>
             </Button>
