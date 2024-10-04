@@ -6,6 +6,12 @@ import { ShowAnimation } from "@/utils/animation";
 import { Addprompt } from "./Addprompt";
 import Cardclass from "./Cardclass";
 export default function Dashboard() {
+  //get classes that have the same username of the login account from the array that wass passed like a prop (they are the classes that was created by the user)
+  //get the oposite classes from the array that was passed like a prop (they are the joining availbale classes)
+
+  //check if the joing code is in the array that was passed like a prop
+  //check if the classes that was created is already in the db or not
+
   return (
     <motion.div
       variants={ShowAnimation}

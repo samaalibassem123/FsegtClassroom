@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 import Header from "@/components/Header";
 export default async function page() {
+  //get calsses from db and add them to an array
   const session = await auth();
   if (!session?.user) {
     redirect("/");
