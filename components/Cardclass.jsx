@@ -31,7 +31,9 @@ export default function Cardclass({ classId = "test" }) {
         </div>
       </div>
       <div className="w-full flex justify-center  items-center">
-        <Button>Enter</Button>
+        <Button>
+          <Link href={`/${classId}`}>Enter</Link>
+        </Button>
       </div>
       <div className="flex items-center justify-evenly">
         <Button asChild className="bg-gray-400">
