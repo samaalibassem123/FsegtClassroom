@@ -10,9 +10,7 @@ export default async function page({ classes }) {
   }
   return (
     <div className="flex flex-wrap md:justify-start justify-center w-full">
-      <div className="w-[260px]">
-        <Uploaddoc />
-      </div>
+      <Uploaddoc ClassId={classes} />
     </div>
   );
 }

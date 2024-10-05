@@ -16,9 +16,13 @@ export const ourFileRouter = {
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
       return { uploadedBy: metadata.userId };
     }),
-  pdfUploader: f({ pdf: { maxFileSize: "200MB" } }).onUploadComplete(
-    async ({ metadata, file }) => {
-      console.log("file url", file.url);
-    }
-  ),
+  pdfUploader: f([
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "pdf",
+    "application/vnd.ms-powerpoint",
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+  ]).onUploadComplete(async ({ metadata, file }) => {
+    console.log("file url", file.url);
+  }),
 };

@@ -1,10 +1,10 @@
 "use client";
-
+import { react, useState, useEffect } from "react";
 import { UploadDropzone } from "@/utils/uploadthing";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Uploaddoc() {
+export default function Uploaddoc({ ClassId }) {
   const success = () =>
     toast.success("Uploaded succesfully", {
       position: "top-right",
@@ -29,14 +29,19 @@ export default function Uploaddoc() {
       transition: Bounce,
     });
   };
+
+  const [Documents, setDocuments] = useState([]);
+
+  //get documents form the db
+
   return (
     <>
+      {/*check if the user have the role of a teacher so he can upload files or not */}
       <UploadDropzone
-        className=" cursor-pointer dark:border-white"
+        className=" h-[250px] w-[250px]  cursor-pointer dark:border-white ut-allowed-content:hidden ut-button:bg-blue-400"
         endpoint="pdfUploader"
         onClientUploadComplete={(res) => {
-          // Do something with the response
-          console.log("Files: ", res);
+          setDocuments([...Documents, res[0].url]);
           success();
         }}
         onUploadError={(error) => {
@@ -45,6 +50,7 @@ export default function Uploaddoc() {
         }}
       />
       <ToastContainer />
+      {Documents && Documents.map((docUrl, index) => <div key={index}></div>)}
     </>
   );
 }
