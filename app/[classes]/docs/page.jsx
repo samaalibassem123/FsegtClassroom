@@ -9,7 +9,7 @@ export default async function page({ classes }) {
     redirect("/");
   }
   return (
-    <div className="flex flex-col gap-3 md:justify-start p-2 w-full">
+    <div className="flex flex-col gap-3 md:justify-start w-full">
       <Uploaddoc ClassId={classes} />
     </div>
   );

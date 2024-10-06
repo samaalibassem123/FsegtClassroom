@@ -17,7 +17,17 @@ export default function Cardclass({ classId = "test" }) {
   const [docClicked, docIsClicked] = useState(false);
   const [meetClicked, meetIsClicked] = useState(false);
   const [chatClicked, chatIsClicked] = useState(false);
-  const notify = () => toast("copied !");
+  const notify = () =>
+    toast.success("copied !", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   const handleCopyClick = async (text) => {
     try {
       await copy(text);
@@ -28,9 +38,9 @@ export default function Cardclass({ classId = "test" }) {
   };
   return (
     <>
-      <div className="flex flex-col gap-7 w-[300px] h-[300px] border p-2 rounded-lg bg-white">
+      <div className="flex flex-col gap-7 w-[300px] h-[300px] border p-2 rounded-lg bg-white drop-shadow-sm">
         <div className="flex justify-between items-center  py-2 border-b-2">
-          <h1 className=" font-semibold text-xl text-white bg-black w-fit rounded-lg p-2">
+          <h1 className=" font-semibold text-md text-white bg-gradient-to-br from-blue-200 to-orange-200 w-fit rounded-lg p-1 px-2">
             2BI
           </h1>
           <span className="text-black">Sii mo7ssen</span>
@@ -51,7 +61,6 @@ export default function Cardclass({ classId = "test" }) {
             <div onClick={() => handleCopyClick("Q67msf")}>
               <Files className=" bg-black/20 active:scale-75 rounded-sm p-1 hover:cursor-pointer size-6" />
             </div>
-            <ToastContainer />
           </div>
         </div>
         <div className="w-full flex justify-center  items-center">
