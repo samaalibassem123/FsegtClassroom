@@ -19,6 +19,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@uploadthing/react": "^7.0.2",
     "class-variance-authority": "^0.7.0",
+    "clipboard-copy": "^4.0.1",
     "clsx": "^2.1.1",
     "framer-motion": "^11.9.0",
     "livekit-server-sdk": "^2.6.2",
@@ -29,6 +30,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.3.0",
+    "react-loader-spinner": "^6.1.6",
     "react-simple-tostify": "^5.2.1",
     "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.5.2",
@@ -36,6 +38,7 @@
     "uploadthing": "^7.0.2"
   },
   "devDependencies": {
+    "@types/react": "^18.3.11",
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
     "postcss": "^8",

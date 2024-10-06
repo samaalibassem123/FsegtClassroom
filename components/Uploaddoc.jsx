@@ -3,6 +3,9 @@ import { react, useState, useEffect } from "react";
 import { UploadDropzone } from "@/utils/uploadthing";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Button } from "./ui/button";
+import { Trash2, NotebookPen, Space, FileText, Type } from "lucide-react";
+import Link from "next/link";
 
 export default function Uploaddoc({ ClassId }) {
   const success = () =>
@@ -26,12 +29,12 @@ export default function Uploaddoc({ ClassId }) {
       draggable: true,
       progress: undefined,
       theme: "light",
-      transition: Bounce,
     });
   };
 
   const [Documents, setDocuments] = useState([]);
 
+  //get
   //get documents form the db
 
   return (
@@ -41,7 +44,11 @@ export default function Uploaddoc({ ClassId }) {
         className=" h-[250px] w-[250px]  cursor-pointer dark:border-white ut-allowed-content:hidden ut-button:bg-blue-400"
         endpoint="pdfUploader"
         onClientUploadComplete={(res) => {
-          setDocuments([...Documents, res[0].url]);
+          console.log(res);
+          setDocuments([
+            ...Documents,
+            { name: res[0].name, url: res[0].url, type: res[0].type },
+          ]);
           success();
         }}
         onUploadError={(error) => {
@@ -50,7 +57,27 @@ export default function Uploaddoc({ ClassId }) {
         }}
       />
       <ToastContainer />
-      {Documents && Documents.map((docUrl, index) => <div key={index}></div>)}
+      {Documents &&
+        Documents.map((file, index) => (
+          <div
+            className="dark:border-white flex h-fit rounded-lg p-5 border w-full shadow-sm"
+            key={index}
+          >
+            <div className="flex items-center justify-between w-full ">
+              <span className=" flex items-center gap-1 underline">
+                <FileText />
+                <a href={file.url} target="_blank">
+                  {file.name}
+                </a>
+              </span>
+              <span></span>
+              {/*Hide the delete button when the role of user is a student */}
+              <Button className="bg-red-500">
+                <Trash2 />
+              </Button>
+            </div>
+          </div>
+        ))}
     </>
   );
 }

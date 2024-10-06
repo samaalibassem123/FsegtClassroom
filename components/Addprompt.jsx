@@ -26,37 +26,44 @@ export function Addprompt() {
           <DialogTitle>Add a class</DialogTitle>
           <DialogDescription>Create your own class</DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Classname:
-            </Label>
-            <Input
-              id="username"
-              placeholder="type your class name"
-              className="col-span-3"
-            />
+        <form>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="username" className="text-right">
+                Classname:
+              </Label>
+              <Input
+                id="username"
+                placeholder="type your class name"
+                className="col-span-3"
+              />
+            </div>
+
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="username" className="text-right">
+                Code:
+              </Label>
+              <Input
+                id="username"
+                placeholder="*******"
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="username" className="text-right">
+                Niveau:
+              </Label>
+              <Input
+                id="username"
+                placeholder="exemple: 2BI"
+                className="col-span-3"
+              />
+            </div>
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Code:
-            </Label>
-            <Input id="username" placeholder="*******" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Niveau:
-            </Label>
-            <Input
-              id="username"
-              placeholder="exemple: 2BI"
-              className="col-span-3"
-            />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button type="submit">Submit</Button>
-        </DialogFooter>
+          <DialogFooter>
+            <Button type="submit">Submit</Button>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );

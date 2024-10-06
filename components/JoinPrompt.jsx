@@ -29,17 +29,23 @@ export function JoinPrompt() {
             teacher to join your class
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Code:
-            </Label>
-            <Input id="username" placeholder="*******" className="col-span-3" />
+        <form action="">
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="username" className="text-right">
+                Code:
+              </Label>
+              <Input
+                id="username"
+                placeholder="*******"
+                className="col-span-3"
+              />
+            </div>
           </div>
-        </div>
-        <DialogFooter>
-          <Button type="submit">Submit</Button>
-        </DialogFooter>
+          <DialogFooter>
+            <Button type="submit">Submit</Button>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );

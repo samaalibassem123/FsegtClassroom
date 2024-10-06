@@ -1,10 +1,10 @@
 "use server";
-import { FcGoogle } from "react-icons/fc";
 import React from "react";
 import { ModeToggle } from "@/components/ModeToggle";
-import { FaFacebook } from "react-icons/fa";
 import { auth, signIn } from "@/auth";
 import { redirect } from "next/navigation";
+import GoogleButton from "@/components/GoogleButton";
+import FacebookButton from "@/components/FacebookButton";
 
 export default async function page() {
   const session = await auth();
@@ -20,20 +20,29 @@ export default async function page() {
           <div className=" absolute top-0 w-full  flex items-center justify-end p-2 z-30">
             <ModeToggle />
           </div>
-          <form
-            action={async () => {
-              "use server";
-              await signIn("google");
-            }}
-            className="flex flex-col gap-5 items-center"
-          >
-            <button className="flex w-[240px] justify-between items-center gap-2 border p-2 px-3 rounded-lg bg-black border-white hover:opacity-50 text-white dark:bg-white dark:text-black">
-              Continue With Google <FcGoogle className="size-6" />
-            </button>
-            <button className=" flex items-center  gap-2 border border-white hover:opacity-50 transition-all p-2 px-3 rounded-lg bg-black text-white dark:bg-white dark:text-black">
-              Continue With Facebook <FaFacebook className="size-6" />
-            </button>
-          </form>
+          {/*Oauth authentication */}
+          <div className="flex flex-col gap-2">
+            {/*Google Authentication*/}
+            <form
+              action={async () => {
+                "use server";
+                await signIn("google");
+              }}
+              className="flex flex-col gap-5 items-center"
+            >
+              <GoogleButton />
+            </form>
+            {/*Facebook authentication*/}
+            <form
+              action={async () => {
+                "use server";
+                await signIn("facebook");
+              }}
+              className=" flex flex-col gap-5 items-center"
+            >
+              <FacebookButton />
+            </form>
+          </div>
         </div>
       </>
     );
