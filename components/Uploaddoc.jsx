@@ -1,17 +1,16 @@
 "use client";
 import { react, useState, useEffect } from "react";
 import { UploadDropzone } from "@/utils/uploadthing";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Button } from "./ui/button";
-import { Trash2, NotebookPen, Space, FileText, Type } from "lucide-react";
-import Link from "next/link";
-import { Input } from "./ui/input";
+import { Trash2, FileText } from "lucide-react";
 import { Textarea } from "./ui/textarea";
+import Spinner from "./Spinner";
 
 export default function Uploaddoc({ ClassId }) {
-  const success = () =>
-    toast.success("Uploaded succesfully", {
+  const success = (msg) =>
+    toast.success(msg, {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -36,9 +35,31 @@ export default function Uploaddoc({ ClassId }) {
 
   const [addnote, setAddNote] = useState(false);
   const [note, setNote] = useState("");
-
   const [Documents, setDocuments] = useState([]);
 
+  const DeleteFileFromCloud = async (id, file) => {
+    document.getElementById(id).innerHTML = "Loading...";
+
+    try {
+      const res = await fetch("/api/uploadthing", {
+        method: "DELETE",
+        body: JSON.stringify({ fileKey: file.key }),
+      });
+      const resp = await res.json();
+      console.log(resp);
+      if (resp.msg.success) {
+        success("Deleted Succesfully !");
+        setDocuments(
+          Documents.filter((document) => document.name !== file.name)
+        );
+      } else {
+        Error("ERROR in deleting try Again !");
+      }
+    } catch (err) {
+      Error(err);
+      throw err;
+    }
+  };
   //get documents form the db
 
   return (
@@ -51,16 +72,21 @@ export default function Uploaddoc({ ClassId }) {
           console.log(res);
           setDocuments([
             ...Documents,
-            { name: res[0].name, url: res[0].url, type: res[0].type },
+            {
+              name: res[0].name,
+              url: res[0].url,
+              type: res[0].type,
+              key: res[0].key,
+            },
           ]);
-          success();
+          success("Uploaded Succesfully !");
         }}
         onUploadError={(error) => {
           // Do something with the error.
           Error(error.message);
         }}
       />
-      <ToastContainer />
+
       {/*documents container */}
       {Documents &&
         Documents.map((file, index) => (
@@ -93,7 +119,13 @@ export default function Uploaddoc({ ClassId }) {
                 >
                   Add a Note
                 </Button>
-                <Button className="bg-red-500 p-2">
+                <Button
+                  id={index}
+                  className="bg-red-500 p-2"
+                  onClick={() => {
+                    DeleteFileFromCloud(index, file);
+                  }}
+                >
                   <Trash2 />
                 </Button>
               </div>
