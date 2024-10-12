@@ -59,7 +59,7 @@ export default function ChatUI() {
       ) : loading ? (
         <RingLoader color="#0052ff" size={30} />
       ) : (
-        <div className="">
+        <div className="p-2">
           <SplitTextAnimation text={result} />
         </div>
       )}
