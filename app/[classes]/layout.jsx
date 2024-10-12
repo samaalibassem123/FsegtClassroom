@@ -22,15 +22,7 @@ export const metadata = {
 export default function RootLayout({ children, params }) {
   return (
     <main>
-      <NextSSRPlugin
-        /**
-         * The `extractRouterConfig` will extract **only** the route configs
-         * from the router to prevent additional information from being
-         * leaked to the client. The data passed to the client is the same
-         * as if you were to fetch `/api/uploadthing` directly.
-         */
-        routerConfig={extractRouterConfig(ourFileRouter)}
-      />
+      <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
       <ThemeProvider attribute="class" enableSystem>
         <Header />
         <div className="flex gap-2">
@@ -41,7 +33,7 @@ export default function RootLayout({ children, params }) {
               className=" gap-2 flex items-center gap shadow-md hover:shadow-lg transition-all font-semibold  dark:bg-white dark:text-black  p-2 rounded-lg sm:w-full w-fit"
             >
               <MessageCircle />
-              <span className="sm:inline-block hidden">chat</span>
+              <span className="sm:inline-block hidden">chat With Ai</span>
             </Link>
             <Link
               title="video call"
