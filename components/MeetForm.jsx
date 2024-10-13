@@ -66,10 +66,21 @@ export default function MeetForm() {
           <Label className="text-gray-400">
             Enter the Code of the meet to join
           </Label>
-          <Input type="text" name="code" className=" dark:border-white" />
+          <Input
+            type="text"
+            name="code"
+            className=" dark:border-white"
+            required="true"
+          />
           <Button type="submit">Join</Button>
-          <Button asChild>
-            <Link href="/">Go Back to Dashboard</Link>
+          <Button
+            type="button"
+            asChild
+            className=" border hover:opacity-50 transition-all border-black dark:border-white bg-black text-transparent bg-gradient-to-tr from-orange-400 bg-clip-text to-blue-400"
+          >
+            <Link href="/" className="">
+              Go Back to Dashboard
+            </Link>
           </Button>
         </form>
       </div>

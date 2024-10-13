@@ -37,20 +37,20 @@ export default function SplitTextAnimation({ text, className = "" }) {
 
   return (
     <motion.h2
-      className={`text-md font-bold  ${className}`}
+      className={`text-md    ${className}`}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
       aria-label={text}
     >
-      {text.split("").map((char, index) => (
-        <motion.span
-          key={`${char}-${index}`}
+      {text.split("\n").map((line, index) => (
+        <motion.p
+          key={`${line}-${index}`}
           variants={childVariants}
-          className="inline-block"
+          className=" whitespace-pre-line"
         >
-          {char === " " ? "\u00A0" : char}
-        </motion.span>
+          {line}
+        </motion.p>
       ))}
     </motion.h2>
   );

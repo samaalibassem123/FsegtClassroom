@@ -95,7 +95,9 @@ export default function Uploaddoc({ ClassId }) {
             key={index}
           >
             <div className="flex flex-col gap-2">
-              <span className=" capitalize">{note}</span>
+              <span className=" capitalize" id={file.name}>
+                {note}
+              </span>
               <div className="flex items-center justify-between w-full ">
                 <span className=" flex items-center gap-1 underline">
                   <FileText />
@@ -132,7 +134,12 @@ export default function Uploaddoc({ ClassId }) {
 
               {addnote && (
                 <form className="flex xl:w-[500px] gap-2 items-center">
-                  <Textarea onChange={(e) => setNote(e.target.value)} />
+                  <Textarea
+                    onChange={(e) =>
+                      (document.getElementById(file.name).innerHTML =
+                        e.target.value)
+                    }
+                  />
                   <Button onClick={() => setAddNote(false)}>Add</Button>
                 </form>
               )}

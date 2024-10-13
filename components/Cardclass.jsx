@@ -13,6 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Cardclass({ classId = "test" }) {
+  const classid = classId;
   const [EnterClicked, EnterIsClicked] = useState(false);
   const [docClicked, docIsClicked] = useState(false);
   const [meetClicked, meetIsClicked] = useState(false);
@@ -68,7 +69,7 @@ export default function Cardclass({ classId = "test" }) {
             {EnterClicked ? (
               <Spinner />
             ) : (
-              <Link href={`/${classId}`}>Enter</Link>
+              <Link href={`/${classId}/docs`}>Enter</Link>
             )}
           </Button>
         </div>

@@ -12,8 +12,8 @@ export default function ChatUI() {
   const [loading, setLoading] = useState(false);
   const name = session?.user?.name;
   const HandleSubmit = async (e) => {
-    e.preventDefault();
     setLoading(true);
+    e.preventDefault();
     const form = e.target;
     const text = form.text.value;
     try {
@@ -42,7 +42,7 @@ export default function ChatUI() {
           name="text"
           className=" border-2"
         />
-        <Button className=" w-[200px] bg-gradient-to-tr from-orange-400 to-blue-500 hover:opacity-50 transition-all">
+        <Button className=" border-black w-[200px] bg-gradient-to-tr from-white/30 to-blue-500 hover:opacity-50 transition-all">
           Sent
         </Button>
       </form>
@@ -59,7 +59,7 @@ export default function ChatUI() {
       ) : loading ? (
         <RingLoader color="#0052ff" size={30} />
       ) : (
-        <div className="p-2">
+        <div className="p-2 rounded-lg  dark:bg-white/10 bg-black/5">
           <SplitTextAnimation text={result} />
         </div>
       )}
