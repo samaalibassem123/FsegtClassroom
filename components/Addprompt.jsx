@@ -41,10 +41,12 @@ export function Addprompt({ teachermail, role }) {
           classname: ClassName,
           classniv: Niveau,
           teacherMail: teachermail,
+          teachername: session?.user?.name,
+          teacherimg: session?.user?.image,
         }),
       });
       const res = await req.json();
-      console.log(res.ok);
+      console.log(res);
       if (!res.ok) {
         setError(true);
       } else {
