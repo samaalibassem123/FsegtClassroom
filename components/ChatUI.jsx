@@ -53,7 +53,7 @@ export default function ChatUI() {
             <span className="text-transparent bg-gradient-to-tr from-orange-300 to-blue-400  bg-clip-text">
               Hello {name},
             </span>
-            <br /> What can I do to help you?
+            <br /> How Can I help you Today?
           </h1>
         </div>
       ) : loading ? (

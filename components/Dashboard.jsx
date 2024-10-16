@@ -27,7 +27,6 @@ export default function Dashboard({ UserMail }) {
         );
         const res = await req.json();
         setClassCreated(res);
-        console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -48,14 +47,11 @@ export default function Dashboard({ UserMail }) {
         );
         const res = await req.json();
         setClassJoined(res);
-        console.log(res);
       } catch (err) {
         console.log(err);
       }
     };
     getClassJ();
-    //check if the joing code is in the array that was passed like a prop
-    //check if the classes that was created is already in the db or not
   }, []);
 
   return (
