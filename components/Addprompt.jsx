@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,8 +13,46 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CirclePlus } from "lucide-react";
+import { useSession } from "next-auth/react";
 
-export function Addprompt() {
+export function Addprompt({ teachermail, role }) {
+  const { data: session } = useSession();
+  const [err, setError] = useState(false);
+
+  const addClass = async (e) => {
+    e.preventDefault();
+    const formData = e.target;
+    const ClassCode = formData.classcode.value;
+    const ClassName = formData.classname.value;
+    const Niveau = formData.niv.value;
+
+    //Add the class in the database
+    try {
+      const req = await fetch("/api/classes/teacher", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          classcode: ClassCode,
+          classname: ClassName,
+          classniv: Niveau,
+          teacherMail: teachermail,
+        }),
+      });
+      const res = await req.json();
+      console.log(res.ok);
+      if (!res.ok) {
+        setError(true);
+      } else {
+        setError(false);
+        window.location.reload();
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -26,37 +65,46 @@ export function Addprompt() {
           <DialogTitle>Add a class</DialogTitle>
           <DialogDescription>Create your own class</DialogDescription>
         </DialogHeader>
-        <form>
+        <form onSubmit={addClass} method="POST">
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="username" className="text-right">
                 Classname:
               </Label>
               <Input
-                id="username"
+                name="classname"
                 placeholder="type your class name"
                 className="col-span-3"
+                required="true"
               />
             </div>
-
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="username" className="text-right">
                 Code:
               </Label>
-              <Input
-                id="username"
-                placeholder="*******"
-                className="col-span-3"
-              />
-            </div>
+              <div className="col-span-3 falex flex-col items-center w-full">
+                <Input
+                  name="classcode"
+                  placeholder="*******"
+                  className=""
+                  required="true"
+                />
+                {err && (
+                  <span className="text-sm text-red-400">
+                    Code is taken try Another one
+                  </span>
+                )}
+              </div>
+            </div>{" "}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="username" className="text-right">
                 Niveau:
               </Label>
               <Input
-                id="username"
+                name="niv"
                 placeholder="exemple: 2BI"
                 className="col-span-3"
+                required="true"
               />
             </div>
           </div>
