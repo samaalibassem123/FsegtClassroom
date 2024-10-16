@@ -79,8 +79,8 @@ export default function Dashboard({ UserMail }) {
           {ClassJoined.map((item, index) => (
             <motion.div key={index} variants={ShowAnimation}>
               <Cardclass
-                teachername={session?.user?.name}
-                teacherimg={session?.user?.image}
+                teachername={item.teachername}
+                teacherimg={item.teacherimg}
                 classname={item.classname}
                 classcode={item.classcode}
                 classniv={item.classniv}
