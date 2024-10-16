@@ -14,12 +14,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CirclePlus } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Spinner from "./Spinner";
 
 export function Addprompt({ teachermail, role }) {
   const { data: session } = useSession();
   const [err, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const addClass = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const formData = e.target;
     const ClassCode = formData.classcode.value;
@@ -48,7 +51,9 @@ export function Addprompt({ teachermail, role }) {
         setError(false);
         window.location.reload();
       }
+      setLoading(false);
     } catch (err) {
+      setLoading(false);
       throw err;
     }
   };
@@ -109,7 +114,7 @@ export function Addprompt({ teachermail, role }) {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit">Submit</Button>
+            <Button type="submit">{loading ? <Spinner /> : "Submit"}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

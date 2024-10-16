@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -14,8 +14,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LogIn } from "lucide-react";
 import { toast } from "react-toastify";
+import Spinner from "./Spinner";
 
 export function JoinPrompt({ studentMail, studentName, studentImg }) {
+  const [loading, setLoading] = useState(false);
   const Warning = (msg) => {
     toast.warn(msg, {
       position: "top-center",
@@ -30,6 +32,7 @@ export function JoinPrompt({ studentMail, studentName, studentImg }) {
   };
   //Join a class
   const HandleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const form = e.target;
     const Classcode = form.classcode.value;
@@ -51,6 +54,7 @@ export function JoinPrompt({ studentMail, studentName, studentImg }) {
     } else {
       window.location.reload();
     }
+    setLoading(false);
   };
   return (
     <Dialog>
@@ -82,7 +86,7 @@ export function JoinPrompt({ studentMail, studentName, studentImg }) {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit">Submit</Button>
+            <Button type="submit">{loading ? <Spinner /> : "Submit"}</Button>
           </DialogFooter>
         </form>
       </DialogContent>
