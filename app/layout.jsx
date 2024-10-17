@@ -1,5 +1,6 @@
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title: "Fsegt-classroom",
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
         <ThemeProvider attribute="class" enableSystem>
           {children}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import MeetForm from "@/components/MeetForm";
 import { SessionProvider } from "next-auth/react";
-export default async function page({ classes }) {
+export default async function page({ params }) {
   const session = await auth();
   if (!session?.user) {
     redirect("/");
