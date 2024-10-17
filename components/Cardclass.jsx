@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { BookText, Video, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import Spinner from "./Spinner";
-import { Files } from "lucide-react";
+import { Files, Eye } from "lucide-react";
 import copy from "clipboard-copy";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,6 +23,7 @@ export default function Cardclass({
   const [docClicked, docIsClicked] = useState(false);
   const [meetClicked, meetIsClicked] = useState(false);
   const [chatClicked, chatIsClicked] = useState(false);
+  const [showcode, setShowcode] = useState(false);
   const notify = () =>
     toast.success("copied !", {
       position: "bottom-right",
@@ -66,7 +67,13 @@ export default function Cardclass({
           </div>
           <div className=" text-gray-500 flex items-center gap-1">
             <span>Code:</span>
-            <span className=" underline select-all">{classcode}</span>
+            <span className=" underline select-all">
+              {showcode ? classcode : "*******"}
+            </span>
+            <Eye
+              className=" cursor-pointer "
+              onClick={() => setShowcode(!showcode)}
+            />
             <div onClick={() => handleCopyClick(classcode)}>
               <Files className=" bg-black/20 active:scale-75 rounded-sm p-1 hover:cursor-pointer size-6" />
             </div>
