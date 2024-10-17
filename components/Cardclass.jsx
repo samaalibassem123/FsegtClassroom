@@ -75,7 +75,7 @@ export default function Cardclass({
             {EnterClicked ? (
               <Spinner />
             ) : (
-              <Link href={`/${classcode}/docs`}>Enter</Link>
+              <Link href={`/${classcode} ${role}/docs`}>Enter</Link>
             )}
           </Button>
           {role === "teacher" && <Delete CLASSCODE={classcode} />}
@@ -95,7 +95,7 @@ export default function Cardclass({
             asChild
             className="bg-orange-300"
           >
-            <Link href={`/${classcode}/docs`} title="documents">
+            <Link href={`/${classcode} ${role}/docs`} title="documents">
               {docClicked ? <Spinner /> : <BookText />}
             </Link>
           </Button>
@@ -104,7 +104,7 @@ export default function Cardclass({
             asChild
             className="bg-blue-400"
           >
-            <Link href={`/${classcode}/chat`} title="Chat">
+            <Link href={`/${classcode} ${role}/chat`} title="Chat">
               {chatClicked ? <Spinner /> : <MessageCircle />}
             </Link>
           </Button>

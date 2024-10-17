@@ -82,6 +82,18 @@ export default function Dashboard({ UserMail }) {
             />
           </motion.div>
           {/*classes */}
+          {ClassJoined.map((item, index) => (
+            <motion.div key={index} variants={ShowAnimation}>
+              <Cardclass
+                teachername={item.teachername}
+                teacherimg={item.teacherimg}
+                classname={item.classname}
+                classcode={item.classcode}
+                classniv={item.classniv}
+                role="student"
+              />
+            </motion.div>
+          ))}
           {classCloading && (
             <div className="flex md:flex-row flex-col gap-8">
               <div className="flex flex-col gap-7 w-[300px] h-[320px] p-2 border rounded-lg ">
@@ -105,18 +117,6 @@ export default function Dashboard({ UserMail }) {
               </div>
             </div>
           )}
-          {ClassJoined.map((item, index) => (
-            <motion.div key={index} variants={ShowAnimation}>
-              <Cardclass
-                teachername={item.teachername}
-                teacherimg={item.teacherimg}
-                classname={item.classname}
-                classcode={item.classcode}
-                classniv={item.classniv}
-                role="student"
-              />
-            </motion.div>
-          ))}
         </motion.div>
       </motion.div>
 
@@ -132,6 +132,19 @@ export default function Dashboard({ UserMail }) {
           </motion.div>
 
           {/*classes */}
+
+          {ClassCreated.map((item, index) => (
+            <motion.div key={index} variants={ShowAnimation}>
+              <Cardclass
+                teachername={session?.user?.name}
+                teacherimg={session?.user?.image}
+                classname={item.classname}
+                classcode={item.classcode}
+                classniv={item.classniv}
+                role="teacher"
+              />
+            </motion.div>
+          ))}
           {classJloading && (
             <div className="flex md:flex-row flex-col gap-8">
               <div className="flex flex-col gap-7 w-[300px] h-[320px] p-2 border rounded-lg ">
@@ -155,18 +168,6 @@ export default function Dashboard({ UserMail }) {
               </div>
             </div>
           )}
-          {ClassCreated.map((item, index) => (
-            <motion.div key={index} variants={ShowAnimation}>
-              <Cardclass
-                teachername={session?.user?.name}
-                teacherimg={session?.user?.image}
-                classname={item.classname}
-                classcode={item.classcode}
-                classniv={item.classniv}
-                role="teacher"
-              />
-            </motion.div>
-          ))}
         </motion.div>
       </motion.div>
     </motion.div>

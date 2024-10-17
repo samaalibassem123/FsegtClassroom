@@ -4,7 +4,8 @@ import { auth } from "@/auth";
 import Uploaddoc from "@/components/Uploaddoc";
 import { ToastContainer } from "react-toastify";
 
-export default async function page({ classes }) {
+export default async function page({ params }) {
+  const classes = params.classes;
   const session = await auth();
   if (!session?.user) {
     redirect("/");
