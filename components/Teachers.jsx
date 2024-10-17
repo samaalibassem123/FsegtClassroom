@@ -23,7 +23,7 @@ export default function Teachers({ classcode }) {
           },
         });
         const res = await req.json();
-        console.log(res);
+
         setStudents(res);
       } catch (err) {
         console.log("error");
