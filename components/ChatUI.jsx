@@ -42,8 +42,8 @@ export default function ChatUI() {
           name="text"
           className=" border-2"
         />
-        <Button className=" border-black w-[200px] bg-gradient-to-tr from-white/30 to-blue-500 hover:opacity-50 transition-all">
-          Sent
+        <Button className=" border-black w-[200px]  hover:opacity-50 transition-all">
+          {loading ? <RingLoader color="#1785ff" size={30} /> : "sent"}
         </Button>
       </form>
 
@@ -56,8 +56,6 @@ export default function ChatUI() {
             <br /> How Can I help you Today?
           </h1>
         </div>
-      ) : loading ? (
-        <RingLoader color="#0052ff" size={30} />
       ) : (
         <div className="p-2 rounded-lg  dark:bg-white/10 bg-black/5">
           <SplitTextAnimation text={result} />
