@@ -23,7 +23,7 @@ export async function POST(req) {
         const [FindStudent] = await db.execute(
           `SELECT studentmail FROM students WHERE studentmail= '${studentmail}';`
         );
-        console.log(FindStudent.length);
+
         if (FindStudent.length == 0) {
           await db.execute(
             `INSERT INTO students VALUES( '${studentmail}' , '${studentname}', '${studentimg}' );`
@@ -42,5 +42,20 @@ export async function POST(req) {
     }
   } else {
     return NextResponse.json({ msg: "The code doesn't exist" });
+  }
+}
+
+export async function GET(req) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const classcode = searchParams.get("classcode");
+    //db connection
+    const db = await pool.getConnection();
+    //get students
+    const query = `SELECT s.* FROM students AS s , studentclass AS sc WHERE (s.studentmail = sc.studentmail) AND (classcode = '${classcode}')`;
+    const [rows] = await db.execute(query);
+    return NextResponse.json(rows);
+  } catch (err) {
+    return NextResponse.json(err);
   }
 }

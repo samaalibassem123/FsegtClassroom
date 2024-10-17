@@ -46,3 +46,17 @@ export async function POST(req) {
     );
   }
 }
+
+export async function GET(req) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const classcode = searchParams.get("classcode");
+    //db connection
+    const db = await pool.getConnection();
+    const query = `SELECT t.* FROM teacher AS t , classes AS c WHERE ( t.teachermail = c.teachermail ) AND ( c.classcode = '${classcode}' )`;
+    const [rows] = await db.execute(query);
+    return NextResponse.json(rows);
+  } catch (err) {
+    return NextResponse.json(err);
+  }
+}
