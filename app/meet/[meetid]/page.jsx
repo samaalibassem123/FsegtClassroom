@@ -4,6 +4,7 @@ import { auth } from "@/auth";
 import MeetForm from "@/components/MeetForm";
 import { SessionProvider } from "next-auth/react";
 export default async function page({ params }) {
+  const meetid = params.meetid;
   const session = await auth();
   if (!session?.user) {
     redirect("/");
@@ -19,7 +20,7 @@ export default async function page({ params }) {
 
       <div className=" flex items-center justify-center absolute top-0 left-0 min-h-svh w-full bg-transparent backdrop-blur-3xl">
         <SessionProvider>
-          <MeetForm />
+          <MeetForm classcode={meetid} username={session?.user?.name} />
         </SessionProvider>
       </div>
     </div>

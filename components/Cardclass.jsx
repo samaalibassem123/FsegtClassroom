@@ -86,7 +86,7 @@ export default function Cardclass({
             asChild
             className="bg-gray-400"
           >
-            <Link href={`/meet`} title="video call">
+            <Link href={`/meet/${classcode}`} title="video call">
               {meetClicked ? <Spinner /> : <Video />}
             </Link>
           </Button>

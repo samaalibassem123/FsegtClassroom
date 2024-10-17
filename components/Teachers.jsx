@@ -10,9 +10,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Skeleton } from "./ui/skeleton";
+
 export default function Teachers({ classcode }) {
   const [students, setStudents] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const GetStudents = async () => {
       try {
@@ -25,6 +27,7 @@ export default function Teachers({ classcode }) {
         const res = await req.json();
 
         setStudents(res);
+        setLoading(false);
       } catch (err) {
         console.log("error");
       }
@@ -33,9 +36,9 @@ export default function Teachers({ classcode }) {
   }, []);
 
   return (
-    <div className="sm:w-full w-[300px]">
+    <div className="sm:w-full w-[100px]">
       <h1 className="text-4xl w-[90%] underline p-5 ">Teacher:</h1>
-      <div className="sm:w-fit w-[250px] ">
+      <div className="sm:w-full w-[250px] ">
         <Table>
           <TableCaption>A list of teachers.</TableCaption>
           <TableHeader>
@@ -58,6 +61,46 @@ export default function Teachers({ classcode }) {
                 <TableCell>{student.teachermail}</TableCell>
               </TableRow>
             ))}
+            {loading && (
+              <>
+                <TableRow>
+                  <TableCell className="font-medium">
+                    <Skeleton className="w-10 h-10 rounded-full" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="w-20 h-5" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="w-40 h-5" />
+                    <Skeleton />
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-medium">
+                    <Skeleton className="w-10 h-10 rounded-full" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="w-20 h-5" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="w-40 h-5" />
+                    <Skeleton />
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-medium">
+                    <Skeleton className="w-10 h-10 rounded-full" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="w-20 h-5" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="w-40 h-5" />
+                    <Skeleton />
+                  </TableCell>
+                </TableRow>
+              </>
+            )}
           </TableBody>
         </Table>
       </div>

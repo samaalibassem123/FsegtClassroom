@@ -9,12 +9,9 @@ import {
 } from "@livekit/components-react";
 import "@livekit/components-styles";
 import { Track } from "livekit-client";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
+
 function MyVideoConference() {
   // `useTracks` returns all camera and screen share tracks. If a user
   // joins without a published camera track, a placeholder track is returned.
@@ -37,63 +34,35 @@ function MyVideoConference() {
   );
 }
 
-export default function MeetForm() {
-  const { data: session } = useSession();
+export default function MeetForm({ classcode, username }) {
   const [room, setRoom] = useState("");
-  const name = session?.user?.name;
   const [token, setToken] = useState("");
+  const router = useRouter();
 
-  const Handlesubmit = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    setRoom(form.code.value);
-    try {
-      const resp = await fetch(
-        `/api/get-participant-token?room=${form.code.value}&username=${name}`
-      );
-      const data = await resp.json();
-      setToken(data.token);
-    } catch (e) {
-      console.error(e);
-    }
+  useEffect(() => {
+    const EnterMeet = async () => {
+      try {
+        const resp = await fetch(
+          `/api/get-participant-token?room=${classcode}&username=${username}`
+        );
+        const data = await resp.json();
+        setToken(data.token);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    EnterMeet();
+  }, []);
+  const GoToDashboard = () => {
+    router.push("/account");
   };
-
-  if (room === "") {
-    return (
-      <div className="w-full min-h-svh flex justify-center items-center  sm:p-0 ">
-        <form onSubmit={Handlesubmit} className="flex flex-col gap-4">
-          <Label>Meet code:</Label>
-          <Label className="text-gray-400">
-            Enter the Code of the meet to join
-          </Label>
-          <Input
-            type="text"
-            name="code"
-            className=" dark:border-white"
-            required="true"
-          />
-          <Button type="submit">Join</Button>
-          <Button
-            type="button"
-            asChild
-            className=" border hover:opacity-50 transition-all border-black dark:border-white bg-black text-transparent bg-gradient-to-tr from-orange-400 bg-clip-text to-blue-400"
-          >
-            <Link href="/" className="">
-              Go Back to Dashboard
-            </Link>
-          </Button>
-        </form>
-      </div>
-    );
-  }
-
   if (token === "") {
     return <div>Getting token...</div>;
   } else {
     return (
       <div className="w-full h-screen">
         <LiveKitRoom
-          onDisconnected={() => setRoom("")}
+          onDisconnected={() => GoToDashboard()}
           video={true}
           audio={true}
           token={token}

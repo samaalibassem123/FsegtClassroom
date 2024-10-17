@@ -20,6 +20,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children, params }) {
+  const url = params.classes.split("%20");
+  const classcode = url[0];
   return (
     <main>
       <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
@@ -37,7 +39,7 @@ export default function RootLayout({ children, params }) {
             </Link>
             <Link
               title="video call"
-              href={`/meet`}
+              href={`/meet/${classcode}`}
               className=" gap-2 flex items-center gap shadow-md hover:shadow-lg transition-all font-semibold  dark:bg-white dark:text-black  p-2 rounded-lg sm:w-full w-fit"
             >
               <Video />
