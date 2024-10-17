@@ -6,11 +6,15 @@ import { ShowAnimation } from "@/utils/animation";
 import { Addprompt } from "./Addprompt";
 import Cardclass from "./Cardclass";
 import { useSession } from "next-auth/react";
+import { Skeleton } from "./ui/skeleton";
+
 export default function Dashboard({ UserMail }) {
   const { data: session } = useSession();
 
   const [ClassCreated, setClassCreated] = useState([]);
   const [ClassJoined, setClassJoined] = useState([]);
+  const [classCloading, setclassCloading] = useState(true);
+  const [classJloading, setclassJloading] = useState(true);
 
   useEffect(() => {
     //Get classes that was created by the user
@@ -27,6 +31,7 @@ export default function Dashboard({ UserMail }) {
         );
         const res = await req.json();
         setClassCreated(res);
+        setclassCloading(false);
       } catch (err) {
         console.log(err);
       }
@@ -47,6 +52,7 @@ export default function Dashboard({ UserMail }) {
         );
         const res = await req.json();
         setClassJoined(res);
+        setclassJloading(false);
       } catch (err) {
         console.log(err);
       }
@@ -76,6 +82,29 @@ export default function Dashboard({ UserMail }) {
             />
           </motion.div>
           {/*classes */}
+          {classCloading && (
+            <div className="flex md:flex-row flex-col gap-8">
+              <div className="flex flex-col gap-7 w-[300px] h-[320px] p-2 border rounded-lg ">
+                <div className="flex w-full justify-between">
+                  <Skeleton className="h-10 w-10 rounded-lg" />
+                  <Skeleton className="h-10 w-40 rounded-lg" />
+                  <Skeleton className="h-10 w-10 rounded-full" />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Skeleton className="h-10 w-40 rounded-lg" />
+                  <Skeleton className="h-10 w-40 rounded-lg" />
+                </div>
+                <div className="w-full flex items-center justify-center">
+                  <Skeleton className="h-10 w-20 rounded-lg" />
+                </div>
+                <div className="flex w-full justify-between">
+                  <Skeleton className="h-10 w-20 rounded-lg" />
+                  <Skeleton className="h-10 w-20 rounded-lg" />
+                  <Skeleton className="h-10 w-20 rounded-lg" />
+                </div>
+              </div>
+            </div>
+          )}
           {ClassJoined.map((item, index) => (
             <motion.div key={index} variants={ShowAnimation}>
               <Cardclass
@@ -101,7 +130,31 @@ export default function Dashboard({ UserMail }) {
           <motion.div variants={ShowAnimation}>
             <Addprompt teachermail={UserMail} />
           </motion.div>
+
           {/*classes */}
+          {classJloading && (
+            <div className="flex md:flex-row flex-col gap-8">
+              <div className="flex flex-col gap-7 w-[300px] h-[320px] p-2 border rounded-lg ">
+                <div className="flex w-full justify-between">
+                  <Skeleton className="h-10 w-10 rounded-lg" />
+                  <Skeleton className="h-10 w-40 rounded-lg" />
+                  <Skeleton className="h-10 w-10 rounded-full" />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Skeleton className="h-10 w-40 rounded-lg" />
+                  <Skeleton className="h-10 w-40 rounded-lg" />
+                </div>
+                <div className="w-full flex items-center justify-center">
+                  <Skeleton className="h-10 w-20 rounded-lg" />
+                </div>
+                <div className="flex w-full justify-between">
+                  <Skeleton className="h-10 w-20 rounded-lg" />
+                  <Skeleton className="h-10 w-20 rounded-lg" />
+                  <Skeleton className="h-10 w-20 rounded-lg" />
+                </div>
+              </div>
+            </div>
+          )}
           {ClassCreated.map((item, index) => (
             <motion.div key={index} variants={ShowAnimation}>
               <Cardclass

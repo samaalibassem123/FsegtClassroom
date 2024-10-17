@@ -13,7 +13,7 @@ export async function POST(req) {
     } = await req.json();
     //db connection
     const db = await pool.getConnection();
-
+    console.log(classcode);
     //First we need to check if the class already exist
     const query1 = `SELECT classcode FROM classes WHERE (classcode = '${classcode}') `;
     const [rows] = await db.execute(query1);
