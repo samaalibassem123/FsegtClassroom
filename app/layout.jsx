@@ -24,6 +24,7 @@ export default function RootLayout({ children }) {
           type="image/<generated>"
           sizes="<generated>"
         />
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="dark:bg-white/5">
         <ThemeProvider attribute="class" enableSystem>
