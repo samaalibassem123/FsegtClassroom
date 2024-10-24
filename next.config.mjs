@@ -7,4 +7,4 @@ const nextConfig = withPWA({
   },
 });
 
-export default nextConfig;
+export default withPWA(nextConfig);
