@@ -1,2 +1,2 @@
 ## FsegtClassroom https://fsegtclassroom.vercel.app/
-![Alt text](mainimg.png)
+![Alt text](image.png)
