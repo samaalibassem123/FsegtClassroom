@@ -82,7 +82,7 @@ export default function Dashboard({ UserMail }) {
             />
           </motion.div>
           {/*classes */}
-          {ClassJoined.map((item, index) => (
+          {ClassJoined && ClassJoined.map((item, index) => (
             <motion.div key={index} variants={ShowAnimation}>
               <Cardclass
                 teachername={item.teachername}
@@ -133,7 +133,7 @@ export default function Dashboard({ UserMail }) {
 
           {/*classes */}
 
-          {ClassCreated.map((item, index) => (
+          {ClassCreated && ClassCreated.map((item, index) => (
             <motion.div key={index} variants={ShowAnimation}>
               <Cardclass
                 teachername={session?.user?.name}
