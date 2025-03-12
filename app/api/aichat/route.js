@@ -7,7 +7,7 @@ export async function POST(req) {
 
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const result = await model.generateContent("from now act like your are an aichatbot for a website for e-learning called fsegtcalssroom  there is the prompt handle it :"+prompt);
 
     const response = result.response.text();
